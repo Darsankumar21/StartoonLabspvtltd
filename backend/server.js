@@ -7,7 +7,7 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ["https://startoon-labspvtltd-rgt2c3pyh-darsankumars-projects.vercel.app"], // "orgin" should be "origin"
+  origin: ["https://startoon-labspvtltd-gfkp7yq66-darsankumars-projects.vercel.app"],
   methods: ["POST", "GET"],
   credentials: true
 }));

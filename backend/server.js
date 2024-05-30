@@ -12,16 +12,14 @@ app.use(cors({
   credentials: true
   })); // Replace with your frontend's URL
 
-// Connect to MongoDB (Local Database)
-mongoose.connect('mongodb+srv://admin:surya123@cluster0.iofwe.mongodb.net/startoon', {
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
-
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log('MongoDB database connection established successfully');
-});
+})
+  .then(() => {
+    console.log('Connected to MongoDB');
+    // Rest of your code goes here 
+  })
 
 // Define User schema
 const userSchema = new mongoose.Schema({

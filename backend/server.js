@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   orgin:["https://startoon-labspvtltd-rgt2c3pyh-darsankumars-projects.vercel.app"],
-  method:["POST","GET"],
+  methods:["POST","GET"],
   credentials: true
   })); // Replace with your frontend's URL
 

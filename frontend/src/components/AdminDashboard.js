@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import './dashboard.css'; // Import the CSS file
+import './dashboard.css';
 
 const generateRandomUser = () => {
   const names = ["Alice", "Bob", "Charlie", "David", "Eve"];
@@ -34,11 +34,11 @@ const generateRandomUserCount = () => {
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [userCount, setUserCount] = useState([]);
-  const [view, setView] = useState('home'); // State to manage which view is displayed
+  const [view, setView] = useState('home');
 
   useEffect(() => {
     const fetchData = () => {
-      const randomUsers = Array.from({ length: 5 }, generateRandomUser);
+      const randomUsers = Array.from({ length: 15 }, generateRandomUser); // Generate 15 users
       const randomUserCount = generateRandomUserCount();
 
       setUsers(randomUsers);
@@ -50,50 +50,54 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-dashboard">
-      <h2>Admin Dashboard</h2>
-      <div className="button-container">
-        <button onClick={() => setView('home')}>Home</button>
-        <button onClick={() => setView('graph')}>Graph</button>
+      <div className="dashboard-header">
+        <div className="buttons-container">
+          <button onClick={() => setView('home')} className={view === 'home' ? 'active' : ''}>Home</button>
+          <button onClick={() => setView('graph')} className={view === 'graph' ? 'active' : ''}>Graph</button>
+        </div>
+        <div className="search-container">
+          <input type="text" placeholder="Search" />
+          <button>Search</button>
+        </div>
       </div>
-      {view === 'home' ? (
-        <div>
-          <h3>User Information</h3>
-          <table>
+
+      <div className="dashboard-content">
+        {view === 'home' ? (
+          <table className="user-table">
             <thead>
-              <tr>
+              <tr className="table-header">
+                <th>S.No</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Count</th>
-                <th>Gender</th>
                 <th>Last Login Date</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user, index) => (
                 <tr key={index}>
+                  <td>{index + 1}</td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>{user.count}</td>
-                  <td>{user.gender}</td>
                   <td>{new Date(user.lastLoginDate).toLocaleString()}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
-      ) : (
-        <div>
-          <h3>User Count</h3>
-          <LineChart width={600} height={400} data={userCount}>
-            <XAxis dataKey="date" />
-            <YAxis />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="count" stroke="#8884d8" />
-          </LineChart>
-        </div>
-      )}
+        ) : (
+          <div className="graph-container">
+            <LineChart width={800} height={400} data={userCount}>
+              <XAxis dataKey="date" />
+              <YAxis />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="count" stroke="#8884d8" />
+            </LineChart>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

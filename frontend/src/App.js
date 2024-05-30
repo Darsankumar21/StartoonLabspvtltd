@@ -5,24 +5,25 @@ import Signup from './components/Signup';
 import Profile from './components/Profile';
 import AdminDashboard from './components/AdminDashboard';
 import PrivateRoute from './components/PrivateRoute';
+import LandingPage from './components/LandingPage'; // Import LandingPage
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<LandingPage />} /> {/* Add LandingPage route */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        <Route  element={<PrivateRoute />}>
+        <Route element={<PrivateRoute />}>
           <Route path="/dashboard/profile" element={<Profile />} />
           <Route path="/dashboard/admin" element={<AdminDashboard />} />
         </Route>
 
-        <Route path="*" element={<Navigate to="/" />} />
+        {/* Remove wildcard route to avoid redirect loop */} 
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
-

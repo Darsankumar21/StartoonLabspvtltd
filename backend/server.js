@@ -78,7 +78,7 @@ app.post('/api/login', async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', {
+    const token = jwt.sign({ userId: user._id }, 'darsan', {
       expiresIn: '1h',
     });
 
@@ -111,7 +111,15 @@ function authenticateToken(req, res, next) {
     next();
   });
 }
-
+app.get('/api/users', async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users); 
+  } catch (err) {
+    console.error('Error fetching users:', err);
+    res.status(500).send('Error fetching users');
+  }
+});
 // Get user profile
 app.get('/api/profile', authenticateToken, async (req, res) => {
   try {

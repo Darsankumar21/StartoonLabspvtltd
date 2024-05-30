@@ -5,7 +5,7 @@
           "src": "server.js",
           "use": "@vercel/node",
         "config": {
-        "runtime": "nodejs18.x" // Or choose the desired Node.js version
+        "runtime": "nodejs18.x" 
       }
       }
   ],

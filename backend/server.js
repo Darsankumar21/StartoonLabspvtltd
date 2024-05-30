@@ -6,7 +6,11 @@ const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: '*' })); // Replace with your frontend's URL
+app.use(cors({
+  orgin:["SS"],
+  method:["POST","GET"],
+  credentials: true
+  })); // Replace with your frontend's URL
 
 // Connect to MongoDB (Local Database)
 mongoose.connect('mongodb+srv://admin:surya123@cluster0.iofwe.mongodb.net/startoon', {

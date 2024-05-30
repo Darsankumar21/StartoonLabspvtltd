@@ -7,11 +7,10 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors({
-  orgin:["https://startoon-labspvtltd-rgt2c3pyh-darsankumars-projects.vercel.app"],
-  methods:["POST","GET"],
+  origin: ["https://startoon-labspvtltd-rgt2c3pyh-darsankumars-projects.vercel.app"], // "orgin" should be "origin"
+  methods: ["POST", "GET"],
   credentials: true
-  })); // Replace with your frontend's URL
-
+}));
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
